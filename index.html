@@ -5,6 +5,95 @@
         <title>Rock-paper-scissors</title>
     </head>
     <body>
-        
+        <script>
+            let userScore = 0;
+            let computerScore = 0;
+            let roundscore = 0;
+            
+            function computer() {
+            let compGuess = Math.random();
+            if (compGuess < 0.33) {
+                return 'rock'
+            }
+            else if (compGuess < 0.66) {
+                return 'paper'
+            }
+            else {
+                return 'scissors'
+            }
+            } 
+           
+            function user() {
+            let userGuess = prompt('Rock, Paper, or Scissors ?')
+            if (userGuess === null) {
+                return;
+            }
+            else if (userGuess.toLowerCase() === 'rock' || 
+                userGuess.toLowerCase() === 'paper' || 
+                userGuess.toLowerCase() === 'scissors'){ 
+                console.log(`you picked ${userGuess.toLowerCase()}`);
+                return userGuess.toLowerCase();}
+            else {console.log('Incorrect parameter, please input Rock, Paper, or Scissors');
+                return user();
+            }       
+           }
+
+           function compare() {
+                let user1 = user();
+                let computer1 = computer();
+                if (user1 == null) {
+                    console.log('You exited the game')
+                    return;
+                }
+                else if (user1 === computer1) {
+                    userScore = userScore;
+                    computerScore = computerScore;
+                    return "It's a tie";
+                }
+                else if ((user1 === 'rock' && computer1 === 'scissors') || 
+                         (user1 === 'paper' && computer1 === 'rock') ||
+                         (user1 === 'scissors' && computer1 === 'paper')){
+                            userScore = userScore + 1;
+                            return `${user1} beats ${computer1}! You win this round!`;
+                         }
+                else {
+                    computerScore = computerScore + 1
+                    return `${computer1} beats ${user1}! You lose this round, better luck next round!`;
+                }
+           }
+
+           function r_p_s() {
+            roundscore = 0
+            userScore = 0
+            computerScore = 0
+            while (roundscore < 5) {
+                let round = compare();
+                if (round === undefined) {return};
+                console.log(round);
+                roundscore = roundscore + 1;
+            }
+            if (userScore > computerScore) {
+                return 'You win!'
+            }
+            else if (computerScore > userScore) {
+                return 'You lose, better luck next time !!'
+            }
+            else if (userScore === computerScore) {
+                let try_again = prompt("It's a tie! Would you like to try again? Yes or No");
+                if (try_again.toLowerCase() === 'no') {
+                    return;
+                }
+                else {
+                    return r_p_s();
+                }
+                }
+           }
+
+        console.log(r_p_s());
+
+
+
+            
+        </script>
     </body>
 </html>
